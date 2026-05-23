@@ -1,0 +1,118 @@
+---
+description: Project rules for LeetCodingo
+alwaysApply: true
+---
+
+# Cursor Rules for LeetCodingo
+
+LeetCodingo is a full-stack web app for tracking LeetCode practice with friends.
+
+Use `docs/PROJECT_BRIEF.md` as the main project plan.
+
+## Project Goal
+
+The mini project version should be a simple LeetCode check-in and leaderboard app.
+
+The final project version should become a study analytics app that helps users identify weak algorithm topics and choose what to practice next.
+
+## Tech Stack
+
+- Backend: ASP.NET Core Web API
+- Backend language: C#
+- ORM: Entity Framework Core
+- MVP database: SQLite
+- Frontend: React
+- Version control: Git and GitHub
+
+## Working Style
+
+- Work one phase at a time.
+- Do not rewrite the whole project unless explicitly requested.
+- Do not make large architecture changes without explaining them first.
+- Prefer small, safe, incremental edits.
+- Keep code beginner-friendly.
+- Prefer readable code over clever code.
+- Do not add unnecessary dependencies.
+- Explain large changes before making them.
+
+## Current MVP Scope
+
+Focus on the MVP first.
+
+The MVP should support:
+
+1. Simple user profile or username selection
+2. Add solved LeetCode problem
+3. Save difficulty, tags, solved date, time spent, confidence, and notes
+4. View personal progress
+5. Create or join a group
+6. View group leaderboard
+
+## Do Not Add Yet
+
+Do not add these features until requested:
+
+- Full authentication
+- JWT
+- ASP.NET Identity
+- AI integration
+- LeetCode API sync
+- Deployment setup
+- Complex UI framework
+- Advanced analytics
+
+## Backend Structure
+
+Use this structure for the backend:
+
+- `Models/` for database models
+- `Data/` for `AppDbContext`
+- `Controllers/` for API controllers
+- `DTOs/` for request and response objects
+- `Services/` only when logic becomes too large for controllers
+
+Use async methods for database calls.
+
+Use Entity Framework Core with SQLite for the first version.
+
+## Frontend Structure
+
+Use this structure for the frontend:
+
+- `src/pages/` for main pages
+- `src/components/` for reusable UI components
+- `src/services/` for API calls
+- `src/types/` or `src/models/` if using TypeScript later
+
+Start with simple React components and basic CSS.
+
+## Scoring Rule
+
+Use the following leaderboard score:
+
+- Easy = 1 point
+- Medium = 3 points
+- Hard = 5 points
+
+## Analytics Direction
+
+For the final project, weakness analysis should be based on user study data stored inside LeetCodingo.
+
+Important study data:
+
+- Attempts count
+- Failed count
+- Time spent
+- Confidence level
+- Need review status
+- Notes
+
+Do not rely only on LeetCode public stats for weakness analysis.
+
+## AI Direction
+
+AI should not do the raw analysis.
+
+The backend should calculate weak topics first.
+
+AI can later explain the result in friendly language, but only after the MVP works.
