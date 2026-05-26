@@ -4,10 +4,12 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  /* Duolingo-style: large, round radius */
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -29,9 +31,10 @@
 }
 
 :root {
-  --radius: 0.625rem;
+  /* Bigger radius = rounder, cuter feel (Duolingo) */
+  --radius: 1rem;
 
-  /* White mode - Duolingo-inspired orange accent */
+  /* White background */
   --background: #ffffff;
   --foreground: #1c1c1c;
   --card: #ffffff;
@@ -39,7 +42,7 @@
   --popover: #ffffff;
   --popover-foreground: #1c1c1c;
 
-  /* Primary = Duolingo orange */
+  /* Duolingo orange */
   --primary: #ff6b00;
   --primary-foreground: #ffffff;
 
@@ -50,8 +53,10 @@
   --accent: #fff3e0;
   --accent-foreground: #ff6b00;
   --destructive: #ef4444;
-  --border: #e5e7eb;
-  --input: #e5e7eb;
+
+  /* Slightly bolder border for the chunky Duolingo feel */
+  --border: #e2e8f0;
+  --input: #e2e8f0;
   --ring: #ff6b00;
 }
 
@@ -66,4 +71,26 @@ body {
   margin: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   -webkit-font-smoothing: antialiased;
+}
+
+/* Duolingo-style: chunky bottom border on cards and buttons */
+.duo-card {
+  border-radius: 1.25rem;
+  border: 2px solid var(--color-border);
+  box-shadow: 0 4px 0 0 var(--color-border);
+}
+
+/* Primary button with Duolingo-style pressed effect */
+.duo-btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-primary-foreground);
+  border-radius: 1rem;
+  border: 2px solid color-mix(in oklab, var(--color-primary) 70%, black);
+  box-shadow: 0 4px 0 0 color-mix(in oklab, var(--color-primary) 70%, black);
+  font-weight: 700;
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+.duo-btn-primary:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 0 color-mix(in oklab, var(--color-primary) 70%, black);
 }

@@ -41,7 +41,8 @@ public class UsersController(AppDbContext db) : ControllerBase
         var user = new User
         {
             UserName = request.UserName.Trim(),
-            Email = request.Email?.Trim()
+            Email = request.Email?.Trim(),
+            LeetCodeUsername = request.LeetCodeUsername?.Trim()
         };
 
         db.Users.Add(user);
@@ -55,6 +56,7 @@ public class UsersController(AppDbContext db) : ControllerBase
         Id = u.Id,
         UserName = u.UserName,
         Email = u.Email,
+        LeetCodeUsername = u.LeetCodeUsername,
         CreatedAt = u.CreatedAt
     };
 }
