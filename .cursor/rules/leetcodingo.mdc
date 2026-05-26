@@ -21,8 +21,12 @@ The final project version should become a study analytics app that helps users i
 - Backend language: C#
 - ORM: Entity Framework Core
 - MVP database: SQLite
-- Frontend: React
+- Frontend: React + TypeScript + Vite
+- UI: Tailwind CSS (v4) + shadcn/ui (base-nova style)
+- Routing: React Router
 - Version control: Git and GitHub
+- Frontend deploy: Vercel
+- Backend deploy: Synology NAS (Docker)
 
 ## Working Style
 
@@ -42,11 +46,9 @@ Focus on the MVP first.
 The MVP should support:
 
 1. Simple user profile or username selection
-2. Add solved LeetCode problem
-3. Save difficulty, tags, solved date, time spent, confidence, and notes
-4. View personal progress
-5. Create or join a group
-6. View group leaderboard
+2. Add solved LeetCode problem (number, title, difficulty only)
+3. View personal progress (total solved, solved by difficulty, weekly count)
+4. View global leaderboard across all users
 
 ## Do Not Add Yet
 
@@ -60,6 +62,9 @@ Do not add these features until requested:
 - Deployment setup
 - Complex UI framework
 - Advanced analytics
+- Topic tags on problems
+- Group creation or invite codes
+- Time spent, confidence level, or notes on submissions
 
 ## Backend Structure
 
@@ -80,11 +85,15 @@ Use Entity Framework Core with SQLite for the first version.
 Use this structure for the frontend:
 
 - `src/pages/` for main pages
-- `src/components/` for reusable UI components
-- `src/services/` for API calls
-- `src/types/` or `src/models/` if using TypeScript later
+- `src/components/layout/` for Sidebar and Layout wrapper
+- `src/components/ui/` for shadcn/ui components
+- `src/services/` for API calls (uses `VITE_API_URL` env var)
+- `src/types/` for TypeScript type definitions
+- `src/lib/utils.ts` for the `cn()` helper
 
-Start with simple React components and basic CSS.
+Start with shadcn/ui components (Button, Card, Table, Badge).
+
+The sidebar is fixed at 250px. Pages render in the right main area.
 
 ## Scoring Rule
 

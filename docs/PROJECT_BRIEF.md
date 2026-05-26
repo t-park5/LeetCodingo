@@ -41,15 +41,26 @@ The app does not need to host coding problems or run code. Instead, it tracks wh
 
 ### Frontend
 
-- React
-- JavaScript or TypeScript
-- Basic CSS or a simple UI framework later
+- React + TypeScript + Vite
+- Tailwind CSS (v4)
+- shadcn/ui component library (base-nova style)
+- React Router for navigation
+
+### Design
+
+- White mode (light theme only)
+- Duolingo-inspired: white background with orange (#ff6b00) primary accent
+- Layout: fixed 250px sidebar (left) + scrollable main content (right)
+
+### Deployment
+
+- Frontend: Vercel (SPA, static hosting)
+- Backend + DB: Synology NAS via Docker container (port forwarding / DDNS)
+- API base URL managed via environment variable (`VITE_API_URL`)
 
 ### Development Tools
 
-- VS Code + GitHub Copilot as the main IDE workflow
-- Cursor for larger multi-file edits
-- GitHub for version control
+- Cursor as main IDE
 
 ## Mini Project MVP
 
@@ -63,18 +74,10 @@ The mini project should stay simple and realistic.
    - LeetCode number
    - Problem title
    - Difficulty
-   - Topic tags
-   - Solved date
-   - Time spent
-   - Confidence level
-   - Notes
-4. User can create a friend group.
-5. User can join a friend group.
-6. User can view a leaderboard.
-7. User can see basic stats:
+4. User can view a global leaderboard across all users.
+5. User can see basic stats:
    - Total solved
    - Solved by difficulty
-   - Solved by topic
    - Weekly solved count
 
 ## Final Project Expansion
@@ -150,27 +153,9 @@ Fields:
 
 ### ProblemTag
 
-Represents a topic tag for a problem.
+Not used in the mini project MVP. Reserved for the final project analytics phase.
 
-Fields:
-
-- Id
-- ProblemId
-- TagName
-
-Examples:
-
-- Array
-- Hash Table
-- Two Pointers
-- Stack
-- Queue
-- Binary Search
-- Tree
-- Graph
-- Dynamic Programming
-- Backtracking
-- Sliding Window
+Topic tag examples for future use: Array, Hash Table, Two Pointers, Stack, Queue, Binary Search, Tree, Graph, Dynamic Programming, Backtracking, Sliding Window.
 
 ### Submission
 
@@ -182,9 +167,6 @@ Fields:
 - UserId
 - ProblemId
 - SolvedDate
-- TimeSpentMinutes
-- ConfidenceLevel
-- Notes
 - CreatedAt
 
 ### Attempt
@@ -214,26 +196,11 @@ Possible Status values:
 
 ### Group
 
-Represents a friend group.
-
-Fields:
-
-- Id
-- Name
-- InviteCode
-- CreatedByUserId
-- CreatedAt
+Not used in the mini project MVP. Reserved for a future phase if group-based leaderboards are added later.
 
 ### GroupMember
 
-Represents a user inside a group.
-
-Fields:
-
-- Id
-- GroupId
-- UserId
-- JoinedAt
+Not used in the mini project MVP. Reserved for a future phase.
 
 ### AIInsight
 
@@ -303,8 +270,6 @@ POST /api/problems
 
 GET /api/problems?difficulty=Medium
 
-GET /api/problems?tag=DynamicProgramming
-
 ### Submissions
 
 POST /api/submissions
@@ -315,21 +280,15 @@ GET /api/submissions/user/{userId}/today
 
 GET /api/submissions/user/{userId}/stats
 
-### Groups
-
-POST /api/groups
-
-POST /api/groups/join
-
-GET /api/groups/user/{userId}
-
-GET /api/groups/{groupId}/members
-
 ### Leaderboard
 
-GET /api/groups/{groupId}/leaderboard
+GET /api/leaderboard
 
-GET /api/groups/{groupId}/leaderboard?range=week
+GET /api/leaderboard?range=week
+
+### Groups
+
+Not part of the mini project MVP. Reserved for a future phase.
 
 ### Analytics
 
@@ -418,25 +377,20 @@ Tasks:
 4. Create models:
    - User
    - Problem
-   - ProblemTag
    - Submission
 5. Create AppDbContext.
 6. Create migrations.
 7. Create ProblemsController.
 8. Create SubmissionsController.
+9. Create LeaderboardController (global, all users).
 
 No authentication yet.
 
-### Phase 2: Groups and Leaderboard
+### Phase 2: Global Leaderboard
 
-Tasks:
+Already included in Phase 1.
 
-1. Create Group model.
-2. Create GroupMember model.
-3. Add group creation.
-4. Add invite code join system.
-5. Add leaderboard calculation.
-6. Add leaderboard endpoint.
+This phase is reserved for adding group-based leaderboards later if needed.
 
 ### Phase 3: Frontend MVP
 
@@ -447,8 +401,7 @@ Pages:
 1. Dashboard
 2. Add Solved Problem
 3. My Progress
-4. Groups
-5. Leaderboard
+4. Leaderboard (global)
 
 ### Phase 4: Analytics
 
@@ -484,7 +437,6 @@ The first working version only needs:
 - Add a solved problem
 - Store it in the database
 - Show user progress
-- Create a group
-- Show leaderboard
+- Show global leaderboard
 
 Everything else can come later.

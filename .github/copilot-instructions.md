@@ -12,8 +12,26 @@ The final project version will become a study analytics app that helps users ide
 - Language: C#
 - Database: SQLite for MVP
 - ORM: Entity Framework Core
-- Frontend: React
+- Frontend: React + TypeScript + Vite
+- UI Library: Tailwind CSS (v4) + shadcn/ui (base-nova style)
+- Routing: React Router
 - Version Control: Git and GitHub
+- Frontend Deploy: Vercel (SPA)
+- Backend Deploy: Synology NAS via Docker (DDNS + port forwarding)
+
+## Environment Variables
+
+The frontend uses `VITE_API_URL` to point to the backend.
+
+- `.env.local` for local development (e.g. `http://localhost:5000`)
+- `.env.production` for production (e.g. NAS DDNS address)
+
+## Design Guidelines
+
+- White mode only (no dark mode in MVP)
+- Primary color: orange (#ff6b00), inspired by Duolingo
+- Layout: fixed 250px sidebar on left, scrollable main content on right
+- Use shadcn/ui components: Button, Card, Table, Badge
 
 ## Main Project Reference
 
@@ -46,27 +64,28 @@ Use `docs/PROJECT_BRIEF.md` as the main source of truth for project goals, data 
 
 ## Frontend Rules
 
-- Use React.
+- Use React + TypeScript.
+- Use Tailwind CSS (v4) for styling.
+- Use shadcn/ui components. Do not build UI primitives from scratch.
+- Use React Router for navigation.
+- Keep all API calls in `src/services/`.
+- Use `VITE_API_URL` environment variable for all API base URLs.
 - Keep components small and readable.
-- Start with basic CSS.
-- Do not over-engineer the UI.
+- Do not add dark mode in the MVP.
 - Build pages in this order:
   1. Dashboard
   2. Add Solved Problem
   3. My Progress
-  4. Groups
-  5. Leaderboard
+  4. Leaderboard (global)
 
 ## MVP Priority
 
 The first working version should support:
 
 1. Creating or selecting a user
-2. Adding a solved LeetCode problem
-3. Saving problem difficulty and topic tags
-4. Viewing personal progress
-5. Creating or joining a group
-6. Viewing a group leaderboard
+2. Adding a solved LeetCode problem (number, title, difficulty only)
+3. Viewing personal progress (total solved, by difficulty, weekly count)
+4. Viewing a global leaderboard across all users
 
 ## Scoring Rule
 
