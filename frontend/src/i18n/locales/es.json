@@ -1,0 +1,109 @@
+{
+  "splash": {
+    "subtitle": "Rastreador de estudio LeetCode"
+  },
+  "nav": {
+    "dashboard": "Inicio",
+    "addProblem": "Agregar Problema",
+    "myProgress": "Mi Progreso",
+    "leaderboard": "Clasificación"
+  },
+  "dashboard": {
+    "title": "LeetCodingo 🦉",
+    "subtitle": "Rastrea tu aprendizaje de LeetCode juntos",
+    "currentUser": "Usuario activo",
+    "selectUser": "Seleccionar usuario",
+    "createNew": "+ Crear nuevo usuario",
+    "createTitle": "Crear nuevo perfil",
+    "nickname": "Apodo",
+    "nicknameRequired": "requerido",
+    "nicknamePlaceholder": "ej. leetcoder123",
+    "leetcodeId": "Usuario de LeetCode",
+    "leetcodeIdNote": "(para sincronización futura)",
+    "leetcodeIdPlaceholder": "ej. john_doe",
+    "createBtn": "Crear perfil",
+    "creating": "Creando...",
+    "cancel": "Cancelar",
+    "totalSolved": "Total resueltos",
+    "thisWeek": "Esta semana",
+    "totalScore": "Puntuación total",
+    "errorNickname": "Por favor ingresa un apodo.",
+    "errorDuplicate": "El nombre de usuario ya existe o error del servidor."
+  },
+  "addProblem": {
+    "title": "Agregar Problema",
+    "subtitle": "Registra un problema resuelto de LeetCode",
+    "noUser": "Por favor selecciona un usuario en el Dashboard primero.",
+    "problemNumber": "Número de problema",
+    "problemNumberPlaceholder": "ej. 1",
+    "problemTitle": "Título del problema",
+    "problemTitlePlaceholder": "ej. Two Sum",
+    "difficulty": "Dificultad",
+    "difficultyPlaceholder": "Seleccionar dificultad",
+    "submitBtn": "✅  Registrar",
+    "submitting": "Guardando...",
+    "cancel": "Cancelar",
+    "scoreHint": {
+      "Easy": "+1 pt",
+      "Medium": "+3 pt",
+      "Hard": "+5 pt"
+    },
+    "successTitle": "¡Registrado!",
+    "successSubtitle": "Redirigiendo a Mi Progreso...",
+    "errorNumber": "Por favor ingresa un número de problema válido.",
+    "errorTitle": "Por favor ingresa el título del problema.",
+    "errorDifficulty": "Por favor selecciona la dificultad.",
+    "errorDuplicate": "El número de problema ya existe. Intenta con otro.",
+    "errorServer": "No se puede conectar al servidor. Verifica dotnet run.",
+    "errorGeneric": "Ocurrió un error. Por favor intenta de nuevo."
+  },
+  "progress": {
+    "title": "Mi Progreso",
+    "subtitle": " estadísticas de aprendizaje",
+    "noUser": "Por favor selecciona un usuario",
+    "goDashboard": "Ir al Dashboard",
+    "loading": "Cargando...",
+    "retry": "Reintentar",
+    "errorLoad": "Error al cargar datos. Verifica el servidor.",
+    "totalSolved": "Total resueltos",
+    "thisWeek": "Esta semana",
+    "totalScore": "Puntuación total",
+    "byDifficulty": "Por dificultad",
+    "recentSolved": "Envíos recientes",
+    "addMore": "+ Agregar problema de hoy",
+    "emptyEmoji": "🦉",
+    "emptyTitle": "¡Sin registros aún!",
+    "emptySubtitle": "¡Empieza registrando tu primer problema!",
+    "addFirst": "Agregar problema",
+    "problems": "problemas",
+    "scoreEach": "pt c/u"
+  },
+  "leaderboard": {
+    "title": "🏆 Clasificación",
+    "subtitle": "Fácil 1pt · Medio 3pt · Difícil 5pt",
+    "allTime": "Histórico",
+    "weekly": "🔥 Esta Semana",
+    "allTimeLabel": "Clasificación histórica",
+    "weeklyLabel": "Clasificación semanal",
+    "loading": "Cargando...",
+    "errorLoad": "Error al cargar la clasificación. Verifica el servidor.",
+    "emptyEmoji": "🏆",
+    "emptyTitle": "Sin datos aún",
+    "emptySubtitle": "¡Resuelve problemas para aparecer en la clasificación!",
+    "rank": "Posición",
+    "user": "Usuario",
+    "total": "Resueltos",
+    "score": "Puntos",
+    "me": "(yo)",
+    "pt": "pt"
+  },
+  "language": {
+    "label": "Idioma"
+  },
+  "mascot": {
+    "dashboard": "¡Everyone!\n¡Vamos a Leetcodear! 🦉",
+    "addProblem": "¿Resolviste algo?\n¡Regístralo ya! ✍️",
+    "progress": "¡La constancia es clave!\nSigue así 💪",
+    "leaderboard": "¡Sigue esforzándote,\nel primer lugar te espera! 🏆"
+  }
+}

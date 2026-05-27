@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LeetCodingo.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5cf27c43ad37fad3838be1d281340ba07cf2ae31")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7c061b91cc507dd45413bfec90b22f28458dd792")]
 [assembly: System.Reflection.AssemblyProductAttribute("LeetCodingo.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LeetCodingo.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

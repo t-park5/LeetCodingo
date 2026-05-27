@@ -1,19 +1,28 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { LayoutDashboard, PlusCircle, BarChart2, Trophy, UserCircle } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { LayoutDashboard, PlusCircle, BarChart2, Trophy, UserCircle, Globe } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { usersService } from "@/services/users";
 import type { User } from "@/types";
 
-const navItems = [
-  { to: "/", label: "Dashboard", icon: LayoutDashboard },
-  { to: "/add", label: "Add Problem", icon: PlusCircle },
-  { to: "/progress", label: "My Progress", icon: BarChart2 },
-  { to: "/leaderboard", label: "Leaderboard", icon: Trophy },
+const LANGUAGES = [
+  { code: "ko", label: "한국어", flag: "🇰🇷" },
+  { code: "en", label: "English", flag: "🇺🇸" },
+  { code: "es", label: "Español", flag: "🇪🇸" },
 ];
 
 export function Sidebar() {
+  const { t, i18n } = useTranslation();
   const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [showLangMenu, setShowLangMenu] = useState(false);
+
+  const navItems = [
+    { to: "/", label: t("nav.dashboard"), icon: LayoutDashboard },
+    { to: "/add", label: t("nav.addProblem"), icon: PlusCircle },
+    { to: "/progress", label: t("nav.myProgress"), icon: BarChart2 },
+    { to: "/leaderboard", label: t("nav.leaderboard"), icon: Trophy },
+  ];
 
   useEffect(() => {
     const savedId = localStorage.getItem("selectedUserId");
@@ -23,13 +32,19 @@ export function Sidebar() {
         .catch(() => localStorage.removeItem("selectedUserId"));
     }
 
-    // Listen for same-tab user selection events
     function onUserSelected(e: Event) {
       setCurrentUser((e as CustomEvent).detail);
     }
     window.addEventListener("userSelected", onUserSelected);
     return () => window.removeEventListener("userSelected", onUserSelected);
   }, []);
+
+  function changeLanguage(code: string) {
+    i18n.changeLanguage(code);
+    setShowLangMenu(false);
+  }
+
+  const currentLang = LANGUAGES.find((l) => l.code === i18n.language) ?? LANGUAGES[0];
 
   return (
     <aside className="w-[250px] shrink-0 h-screen sticky top-0 bg-white border-r border-border flex flex-col">
@@ -63,6 +78,37 @@ export function Sidebar() {
         ))}
       </nav>
 
+      {/* Language switcher */}
+      <div className="px-4 pb-2 relative">
+        <button
+          onClick={() => setShowLangMenu((v) => !v)}
+          className="w-full flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-semibold text-muted-foreground hover:bg-secondary hover:text-foreground transition-colors"
+        >
+          <Globe size={16} />
+          <span>{currentLang.flag} {currentLang.label}</span>
+        </button>
+
+        {showLangMenu && (
+          <div className="absolute bottom-12 left-4 right-4 bg-white border-2 border-border rounded-2xl shadow-lg overflow-hidden z-10">
+            {LANGUAGES.map((lang) => (
+              <button
+                key={lang.code}
+                onClick={() => changeLanguage(lang.code)}
+                className={cn(
+                  "w-full flex items-center gap-2 px-4 py-2.5 text-sm font-semibold transition-colors",
+                  i18n.language === lang.code
+                    ? "bg-[#fff3e0] text-[#ff6b00]"
+                    : "hover:bg-secondary text-foreground"
+                )}
+              >
+                <span>{lang.flag}</span>
+                <span>{lang.label}</span>
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+
       {/* Current user display */}
       <div className="px-4 py-4 border-t border-border">
         {currentUser ? (
@@ -84,7 +130,7 @@ export function Sidebar() {
         ) : (
           <NavLink to="/" className="flex items-center gap-2 px-2 py-2 text-sm text-muted-foreground hover:text-[#ff6b00] transition-colors font-medium">
             <UserCircle size={18} />
-            유저 선택하기
+            {t("dashboard.selectUser")}
           </NavLink>
         )}
       </div>

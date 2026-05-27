@@ -1,0 +1,109 @@
+{
+  "splash": {
+    "subtitle": "LeetCode Study Tracker"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "addProblem": "Add Problem",
+    "myProgress": "My Progress",
+    "leaderboard": "Leaderboard"
+  },
+  "dashboard": {
+    "title": "LeetCodingo 🦉",
+    "subtitle": "Track your LeetCode journey together",
+    "currentUser": "Active User",
+    "selectUser": "Select User",
+    "createNew": "+ Create New User",
+    "createTitle": "Create New Profile",
+    "nickname": "Nickname",
+    "nicknameRequired": "required",
+    "nicknamePlaceholder": "e.g. leetcoder123",
+    "leetcodeId": "LeetCode Username",
+    "leetcodeIdNote": "(for future profile sync)",
+    "leetcodeIdPlaceholder": "e.g. john_doe",
+    "createBtn": "Create Profile",
+    "creating": "Creating...",
+    "cancel": "Cancel",
+    "totalSolved": "Total Solved",
+    "thisWeek": "This Week",
+    "totalScore": "Total Score",
+    "errorNickname": "Please enter a nickname.",
+    "errorDuplicate": "Username already taken or server error."
+  },
+  "addProblem": {
+    "title": "Add Problem",
+    "subtitle": "Log a solved LeetCode problem",
+    "noUser": "Please select a user on the Dashboard first.",
+    "problemNumber": "Problem Number",
+    "problemNumberPlaceholder": "e.g. 1",
+    "problemTitle": "Problem Title",
+    "problemTitlePlaceholder": "e.g. Two Sum",
+    "difficulty": "Difficulty",
+    "difficultyPlaceholder": "Select difficulty",
+    "submitBtn": "✅  Submit",
+    "submitting": "Saving...",
+    "cancel": "Cancel",
+    "scoreHint": {
+      "Easy": "+1 pt",
+      "Medium": "+3 pt",
+      "Hard": "+5 pt"
+    },
+    "successTitle": "Logged!",
+    "successSubtitle": "Redirecting to My Progress...",
+    "errorNumber": "Please enter a valid problem number.",
+    "errorTitle": "Please enter a problem title.",
+    "errorDifficulty": "Please select a difficulty.",
+    "errorDuplicate": "Problem number already exists. Try another.",
+    "errorServer": "Cannot connect to backend. Please run dotnet run.",
+    "errorGeneric": "Something went wrong. Please try again."
+  },
+  "progress": {
+    "title": "My Progress",
+    "subtitle": "'s learning stats",
+    "noUser": "Please select a user",
+    "goDashboard": "Go to Dashboard",
+    "loading": "Loading...",
+    "retry": "Retry",
+    "errorLoad": "Failed to load data. Please check the backend server.",
+    "totalSolved": "Total Solved",
+    "thisWeek": "This Week",
+    "totalScore": "Total Score",
+    "byDifficulty": "By Difficulty",
+    "recentSolved": "Recent Submissions",
+    "addMore": "+ Add Today's Problem",
+    "emptyEmoji": "🦉",
+    "emptyTitle": "No records yet!",
+    "emptySubtitle": "Start logging your first problem!",
+    "addFirst": "Add Problem",
+    "problems": "problems",
+    "scoreEach": "pt each"
+  },
+  "leaderboard": {
+    "title": "🏆 Leaderboard",
+    "subtitle": "Easy 1pt · Medium 3pt · Hard 5pt",
+    "allTime": "All Time",
+    "weekly": "🔥 This Week",
+    "allTimeLabel": "All-Time Rankings",
+    "weeklyLabel": "This Week's Rankings",
+    "loading": "Loading...",
+    "errorLoad": "Failed to load leaderboard. Please check the backend server.",
+    "emptyEmoji": "🏆",
+    "emptyTitle": "No data yet",
+    "emptySubtitle": "Solve problems to appear on the leaderboard!",
+    "rank": "Rank",
+    "user": "User",
+    "total": "Solved",
+    "score": "Score",
+    "me": "(me)",
+    "pt": "pt"
+  },
+  "language": {
+    "label": "Language"
+  },
+  "mascot": {
+    "dashboard": "Everyone!\nLet's Leetcode! 🦉",
+    "addProblem": "Solved a problem?\nLog it right now! ✍️",
+    "progress": "Consistency is key!\nKeep up the great work 💪",
+    "leaderboard": "Keep grinding,\nthe top spot awaits! 🏆"
+  }
+}

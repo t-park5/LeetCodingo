@@ -1,14 +1,20 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { usersService } from "@/services/users";
-import type { User } from "@/types";
+import { submissionsService } from "@/services/submissions";
+import type { User, UserStats } from "@/types";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { UserCircle, Trophy, BookOpen, Flame } from "lucide-react";
+import MascotBubble from "@/components/MascotBubble";
+import mascotDashboard from "@/assets/mascot_dashboard.png";
 
 export function DashboardPage() {
+  const { t } = useTranslation();
   const [users, setUsers] = useState<User[]>([]);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
+  const [stats, setStats] = useState<UserStats | null>(null);
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [userName, setUserName] = useState("");
   const [leetCodeUsername, setLeetCodeUsername] = useState("");
@@ -21,7 +27,10 @@ export function DashboardPage() {
     const saved = localStorage.getItem("selectedUserId");
     if (saved) {
       usersService.getById(Number(saved))
-        .then(setSelectedUser)
+        .then((u) => {
+          setSelectedUser(u);
+          submissionsService.getStats(u.id).then(setStats).catch(() => {});
+        })
         .catch(() => localStorage.removeItem("selectedUserId"));
     }
   }, []);
@@ -37,15 +46,16 @@ export function DashboardPage() {
 
   function selectUser(user: User) {
     setSelectedUser(user);
+    setStats(null);
     localStorage.setItem("selectedUserId", String(user.id));
     setShowCreateForm(false);
-    // Notify Sidebar in the same tab
     window.dispatchEvent(new CustomEvent("userSelected", { detail: user }));
+    submissionsService.getStats(user.id).then(setStats).catch(() => {});
   }
 
   async function handleCreate(e: React.FormEvent) {
     e.preventDefault();
-    if (!userName.trim()) { setError("닉네임을 입력해 주세요."); return; }
+    if (!userName.trim()) { setError(t("dashboard.errorNickname")); return; }
 
     setLoading(true);
     setError("");
@@ -59,25 +69,22 @@ export function DashboardPage() {
       setUserName("");
       setLeetCodeUsername("");
     } catch {
-      setError("이미 사용 중인 닉네임이거나 서버 오류입니다.");
+      setError(t("dashboard.errorDuplicate"));
     } finally {
       setLoading(false);
     }
   }
 
   return (
-    <div className="p-8 max-w-3xl">
-      {/* Header */}
+    <div className="p-8 flex items-start gap-16 max-w-6xl">
+    <div className="flex-1 min-w-0">
       <div className="mb-8">
         <h1 className="text-3xl font-extrabold text-foreground tracking-tight">
-          LeetCodingo 🦎
+          {t("dashboard.title")}
         </h1>
-        <p className="text-muted-foreground mt-1">
-          LeetCode 학습을 함께 트래킹해요
-        </p>
+        <p className="text-muted-foreground mt-1">{t("dashboard.subtitle")}</p>
       </div>
 
-      {/* Active user banner */}
       {selectedUser && (
         <div className="duo-card p-5 mb-8 flex items-center justify-between bg-[#fff3e0]">
           <div className="flex items-center gap-3">
@@ -94,16 +101,15 @@ export function DashboardPage() {
             </div>
           </div>
           <Badge className="bg-[#ff6b00] text-white font-bold px-3 py-1 rounded-full text-xs">
-            현재 유저
+            {t("dashboard.currentUser")}
           </Badge>
         </div>
       )}
 
-      {/* User list */}
       {users.length > 0 && (
         <div className="mb-6">
           <p className="text-sm font-bold text-muted-foreground uppercase tracking-wider mb-3">
-            유저 선택
+            {t("dashboard.selectUser")}
           </p>
           <div className="grid gap-2">
             {users.map((user) => (
@@ -129,25 +135,24 @@ export function DashboardPage() {
         </div>
       )}
 
-      {/* Create user toggle */}
       {!showCreateForm ? (
         <button
           onClick={() => setShowCreateForm(true)}
           className="w-full py-3 rounded-2xl border-2 border-dashed border-[#ff6b00]/40 text-[#ff6b00] font-bold hover:bg-[#fff3e0] transition-colors text-sm"
         >
-          + 새 유저 만들기
+          {t("dashboard.createNew")}
         </button>
       ) : (
-        /* Create user form */
         <div className="duo-card p-6 mt-2">
-          <p className="font-extrabold text-lg mb-5">새 프로필 만들기</p>
+          <p className="font-extrabold text-lg mb-5">{t("dashboard.createTitle")}</p>
           <form onSubmit={handleCreate} className="space-y-4">
             <div>
               <label className="block text-sm font-bold mb-1.5">
-                닉네임 <span className="text-[#ff6b00]">*</span>
+                {t("dashboard.nickname")}{" "}
+                <span className="text-[#ff6b00]">*</span>
               </label>
               <Input
-                placeholder="예: leetcoder123"
+                placeholder={t("dashboard.nicknamePlaceholder")}
                 value={userName}
                 onChange={(e) => setUserName(e.target.value)}
                 className="rounded-xl border-2 h-11 font-medium focus:border-[#ff6b00]"
@@ -155,13 +160,13 @@ export function DashboardPage() {
             </div>
             <div>
               <label className="block text-sm font-bold mb-1.5">
-                LeetCode 아이디
+                {t("dashboard.leetcodeId")}
                 <span className="ml-2 text-xs font-normal text-muted-foreground">
-                  (나중에 프로필 연동에 사용)
+                  {t("dashboard.leetcodeIdNote")}
                 </span>
               </label>
               <Input
-                placeholder="예: john_doe"
+                placeholder={t("dashboard.leetcodeIdPlaceholder")}
                 value={leetCodeUsername}
                 onChange={(e) => setLeetCodeUsername(e.target.value)}
                 className="rounded-xl border-2 h-11 font-medium focus:border-[#ff6b00]"
@@ -178,7 +183,7 @@ export function DashboardPage() {
                 disabled={loading}
                 className="duo-btn-primary flex-1 py-3 text-sm"
               >
-                {loading ? "생성 중..." : "프로필 만들기"}
+                {loading ? t("dashboard.creating") : t("dashboard.createBtn")}
               </button>
               <Button
                 type="button"
@@ -186,29 +191,34 @@ export function DashboardPage() {
                 onClick={() => { setShowCreateForm(false); setError(""); }}
                 className="rounded-xl border-2"
               >
-                취소
+                {t("dashboard.cancel")}
               </Button>
             </div>
           </form>
         </div>
       )}
 
-      {/* Quick stats placeholder */}
       {selectedUser && (
         <div className="grid grid-cols-3 gap-4 mt-8">
           {[
-            { label: "총 풀이", icon: BookOpen, value: "—", color: "text-foreground" },
-            { label: "이번 주", icon: Flame, value: "—", color: "text-[#ff6b00]" },
-            { label: "총 점수", icon: Trophy, value: "—", color: "text-[#ff6b00]" },
-          ].map(({ label, icon: Icon, value, color }) => (
-            <div key={label} className="duo-card p-5 text-center">
+            { key: "totalSolved", icon: BookOpen, value: stats?.totalSolved ?? "—", color: "text-foreground" },
+            { key: "thisWeek", icon: Flame, value: stats?.weeklySolved ?? "—", color: "text-[#ff6b00]" },
+            { key: "totalScore", icon: Trophy, value: stats?.totalScore ?? "—", color: "text-[#ff6b00]" },
+          ].map(({ key, icon: Icon, value, color }) => (
+            <div key={key} className="duo-card p-5 text-center">
               <Icon size={20} className={`mx-auto mb-2 ${color}`} />
               <p className={`text-2xl font-extrabold ${color}`}>{value}</p>
-              <p className="text-xs text-muted-foreground mt-1">{label}</p>
+              <p className="text-xs text-muted-foreground mt-1">{t(`dashboard.${key}`)}</p>
             </div>
           ))}
         </div>
       )}
     </div>
+
+    {/* Mascot column */}
+    <div className="hidden lg:flex flex-col items-center pt-16 shrink-0 pl-8">
+      <MascotBubble image={mascotDashboard} message={t("mascot.dashboard")} />
+    </div>
+  </div>
   );
 }
