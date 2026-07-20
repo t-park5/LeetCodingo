@@ -28,6 +28,7 @@
     "totalSolved": "총 풀이",
     "thisWeek": "이번 주",
     "totalScore": "총 점수",
+    "noProblemsSolved": "아직 풀이가 없어요. LeetCode를 연동해서 시작해보세요!",
     "errorNickname": "닉네임을 입력해 주세요.",
     "errorDuplicate": "이미 사용 중인 닉네임이거나 서버 오류입니다."
   },

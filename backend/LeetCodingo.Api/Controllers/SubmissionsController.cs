@@ -83,6 +83,23 @@ public class SubmissionsController(AppDbContext db) : ControllerBase
         });
     }
 
+    // GET /api/submissions/activity/{userId}
+    // Returns a map of "yyyy-MM-dd" -> count for the activity heatmap.
+    [HttpGet("activity/{userId}")]
+    public async Task<ActionResult<Dictionary<string, int>>> GetActivity(int userId)
+    {
+        var dates = await db.Submissions
+            .Where(s => s.UserId == userId)
+            .Select(s => s.SolvedDate)
+            .ToListAsync();
+
+        var activity = dates
+            .GroupBy(d => d.ToString("yyyy-MM-dd"))
+            .ToDictionary(g => g.Key, g => g.Count());
+
+        return Ok(activity);
+    }
+
     private static SubmissionResponse ToResponse(Submission s, User u, Problem p) => new()
     {
         Id = s.Id,

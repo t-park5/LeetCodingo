@@ -13,5 +13,7 @@ public class UserResponse
     public string UserName { get; set; } = string.Empty;
     public string? Email { get; set; }
     public string? LeetCodeUsername { get; set; }
+    public int CurrentStreak { get; set; }
+    public int WeeklyGoalLessons { get; set; }
     public DateTime CreatedAt { get; set; }
 }

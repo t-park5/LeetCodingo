@@ -26,4 +26,6 @@ public class QuizQuestion
 
     // Display order within the chapter
     public int Order { get; set; }
+
+    public ICollection<UserWrongAnswer> WrongAnswers { get; set; } = [];
 }

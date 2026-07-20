@@ -28,6 +28,7 @@
     "totalSolved": "Total resueltos",
     "thisWeek": "Esta semana",
     "totalScore": "Puntuación total",
+    "noProblemsSolved": "Aún no has resuelto problemas. ¡Sincroniza tu LeetCode para empezar!",
     "errorNickname": "Por favor ingresa un apodo.",
     "errorDuplicate": "El nombre de usuario ya existe o error del servidor."
   },

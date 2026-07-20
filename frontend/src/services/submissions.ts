@@ -10,4 +10,8 @@ export const submissionsService = {
 
   getStats: (userId: number) =>
     api.get<UserStats>(`/api/submissions/user/${userId}/stats`),
+
+  // Returns { "yyyy-MM-dd": count } for the activity heatmap
+  getActivity: (userId: number) =>
+    api.get<Record<string, number>>(`/api/submissions/activity/${userId}`),
 };

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { LayoutDashboard, PlusCircle, BarChart2, Trophy, UserCircle, Globe, Brain, LogOut } from "lucide-react";
+import { LayoutDashboard, BarChart2, Trophy, UserCircle, Globe, Brain, LogOut } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { authService } from "@/services/auth";
 import type { User } from "@/types";
@@ -20,8 +20,6 @@ export function Sidebar() {
 
   const navItems = [
     { to: "/", label: t("nav.dashboard"), icon: LayoutDashboard },
-    { to: "/add", label: t("nav.addProblem"), icon: PlusCircle },
-    { to: "/progress", label: t("nav.myProgress"), icon: BarChart2 },
     { to: "/leaderboard", label: t("nav.leaderboard"), icon: Trophy },
     { to: "/quiz", label: t("nav.quiz"), icon: Brain },
   ];

@@ -12,6 +12,8 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     public DbSet<ProblemTag> ProblemTags => Set<ProblemTag>();
     public DbSet<QuizChapter> QuizChapters => Set<QuizChapter>();
     public DbSet<QuizQuestion> QuizQuestions => Set<QuizQuestion>();
+    public DbSet<UserLessonProgress> UserLessonProgress => Set<UserLessonProgress>();
+    public DbSet<UserWrongAnswer> UserWrongAnswers => Set<UserWrongAnswer>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -49,5 +51,25 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
             .HasOne(pt => pt.Tag)
             .WithMany(t => t.ProblemTags)
             .HasForeignKey(pt => pt.TagId);
+
+        modelBuilder.Entity<UserLessonProgress>()
+            .HasOne(p => p.User)
+            .WithMany(u => u.LessonProgress)
+            .HasForeignKey(p => p.UserId);
+
+        modelBuilder.Entity<UserLessonProgress>()
+            .HasOne(p => p.Chapter)
+            .WithMany(c => c.UserProgress)
+            .HasForeignKey(p => p.ChapterId);
+
+        modelBuilder.Entity<UserWrongAnswer>()
+            .HasOne(w => w.User)
+            .WithMany(u => u.WrongAnswers)
+            .HasForeignKey(w => w.UserId);
+
+        modelBuilder.Entity<UserWrongAnswer>()
+            .HasOne(w => w.Question)
+            .WithMany(q => q.WrongAnswers)
+            .HasForeignKey(w => w.QuestionId);
     }
 }

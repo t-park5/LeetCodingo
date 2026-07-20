@@ -28,6 +28,7 @@
     "totalSolved": "Total Solved",
     "thisWeek": "This Week",
     "totalScore": "Total Score",
+    "noProblemsSolved": "No problems solved yet. Sync your LeetCode to get started!",
     "errorNickname": "Please enter a nickname.",
     "errorDuplicate": "Username already taken or server error."
   },

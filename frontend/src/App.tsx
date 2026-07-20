@@ -2,8 +2,6 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Layout } from '@/components/layout/Layout';
 import { DashboardPage } from '@/pages/DashboardPage';
-import { AddProblemPage } from '@/pages/AddProblemPage';
-import { ProgressPage } from '@/pages/ProgressPage';
 import { LeaderboardPage } from '@/pages/LeaderboardPage';
 import { LoginPage } from '@/pages/LoginPage';
 import { RegisterPage } from '@/pages/RegisterPage';
@@ -54,8 +52,7 @@ function App() {
               }
             >
               <Route path="/" element={<DashboardPage />} />
-              <Route path="/add" element={<AddProblemPage />} />
-              <Route path="/progress" element={<ProgressPage />} />
+              <Route path="/progress" element={<Navigate to="/" replace />} />
               <Route path="/leaderboard" element={<LeaderboardPage />} />
               <Route path="/quiz" element={<QuizPage />} />
             </Route>
