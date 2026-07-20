@@ -9,5 +9,9 @@ public class Problem
     // "Easy", "Medium", "Hard"
     public string Difficulty { get; set; } = string.Empty;
 
+    // LeetCode slug used for GraphQL queries (e.g. "two-sum")
+    public string? TitleSlug { get; set; }
+
     public ICollection<Submission> Submissions { get; set; } = [];
+    public ICollection<ProblemTag> ProblemTags { get; set; } = [];
 }

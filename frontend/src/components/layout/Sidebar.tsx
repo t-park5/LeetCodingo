@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { LayoutDashboard, PlusCircle, BarChart2, Trophy, UserCircle, Globe } from "lucide-react";
+import { LayoutDashboard, PlusCircle, BarChart2, Trophy, UserCircle, Globe, Brain, LogOut } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { usersService } from "@/services/users";
+import { authService } from "@/services/auth";
 import type { User } from "@/types";
 
 const LANGUAGES = [
@@ -14,6 +14,7 @@ const LANGUAGES = [
 
 export function Sidebar() {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [showLangMenu, setShowLangMenu] = useState(false);
 
@@ -22,15 +23,12 @@ export function Sidebar() {
     { to: "/add", label: t("nav.addProblem"), icon: PlusCircle },
     { to: "/progress", label: t("nav.myProgress"), icon: BarChart2 },
     { to: "/leaderboard", label: t("nav.leaderboard"), icon: Trophy },
+    { to: "/quiz", label: t("nav.quiz"), icon: Brain },
   ];
 
   useEffect(() => {
-    const savedId = localStorage.getItem("selectedUserId");
-    if (savedId) {
-      usersService.getById(Number(savedId))
-        .then(setCurrentUser)
-        .catch(() => localStorage.removeItem("selectedUserId"));
-    }
+    const user = authService.getCurrentUser();
+    if (user) setCurrentUser(user as User);
 
     function onUserSelected(e: Event) {
       setCurrentUser((e as CustomEvent).detail);
@@ -38,6 +36,11 @@ export function Sidebar() {
     window.addEventListener("userSelected", onUserSelected);
     return () => window.removeEventListener("userSelected", onUserSelected);
   }, []);
+
+  function handleLogout() {
+    authService.clearSession();
+    navigate("/login");
+  }
 
   function changeLanguage(code: string) {
     i18n.changeLanguage(code);
@@ -109,28 +112,37 @@ export function Sidebar() {
         )}
       </div>
 
-      {/* Current user display */}
+      {/* Current user display + logout */}
       <div className="px-4 py-4 border-t border-border">
         {currentUser ? (
-          <NavLink to="/" className="flex items-center gap-3 p-2 rounded-xl hover:bg-secondary transition-colors">
-            <div className="w-8 h-8 rounded-full bg-[#ff6b00] flex items-center justify-center text-white font-bold text-sm shrink-0">
-              {currentUser.userName[0].toUpperCase()}
-            </div>
-            <div className="overflow-hidden">
-              <p className="text-sm font-bold text-foreground truncate">
-                {currentUser.userName}
-              </p>
-              {currentUser.leetCodeUsername && (
-                <p className="text-xs text-muted-foreground truncate">
-                  {currentUser.leetCodeUsername}
+          <div>
+            <div className="flex items-center gap-3 p-2 rounded-xl">
+              <div className="w-8 h-8 rounded-full bg-[#ff6b00] flex items-center justify-center text-white font-bold text-sm shrink-0">
+                {currentUser.userName[0].toUpperCase()}
+              </div>
+              <div className="overflow-hidden flex-1">
+                <p className="text-sm font-bold text-foreground truncate">
+                  {currentUser.userName}
                 </p>
-              )}
+                {currentUser.leetCodeUsername && (
+                  <p className="text-xs text-muted-foreground truncate">
+                    {currentUser.leetCodeUsername}
+                  </p>
+                )}
+              </div>
             </div>
-          </NavLink>
+            <button
+              onClick={handleLogout}
+              className="w-full flex items-center gap-2 px-3 py-2 mt-1 rounded-xl text-sm font-semibold text-muted-foreground hover:bg-red-50 hover:text-red-500 transition-colors"
+            >
+              <LogOut size={15} />
+              {t("auth.logout")}
+            </button>
+          </div>
         ) : (
-          <NavLink to="/" className="flex items-center gap-2 px-2 py-2 text-sm text-muted-foreground hover:text-[#ff6b00] transition-colors font-medium">
+          <NavLink to="/login" className="flex items-center gap-2 px-2 py-2 text-sm text-muted-foreground hover:text-[#ff6b00] transition-colors font-medium">
             <UserCircle size={18} />
-            {t("dashboard.selectUser")}
+            {t("auth.loginBtn")}
           </NavLink>
         )}
       </div>

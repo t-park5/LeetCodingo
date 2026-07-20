@@ -6,6 +6,44 @@ export interface User {
   createdAt: string;
 }
 
+export interface AuthResponse {
+  token: string;
+  userId: number;
+  userName: string;
+  email?: string;
+  leetCodeUsername?: string;
+}
+
+export interface TagStat {
+  tagName: string;
+  count: number;
+}
+
+export interface SyncResult {
+  newProblemsAdded: number;
+  submissionsSynced: number;
+  message: string;
+}
+
+export interface QuizChapter {
+  id: number;
+  title: string;
+  description: string;
+  order: number;
+  questionCount: number;
+}
+
+export interface QuizQuestion {
+  id: number;
+  questionType: "FillBlank" | "FindBug" | "PredictOutput";
+  prompt: string;
+  codeSnippet?: string;
+  options: string[];
+  correctAnswer: string;
+  explanation?: string;
+  order: number;
+}
+
 export interface Problem {
   id: number;
   leetCodeNumber: number;

@@ -5,8 +5,9 @@ public class User
     public int Id { get; set; }
     public string UserName { get; set; } = string.Empty;
     public string? Email { get; set; }
+    public string PasswordHash { get; set; } = string.Empty;
 
-    // LeetCode profile ID for future stats sync
+    // LeetCode profile ID for stats sync
     public string? LeetCodeUsername { get; set; }
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;

@@ -144,3 +144,13 @@ D:\Downloads\LeetCodingo\backend\LeetCodingo.Api\obj\Debug\net10.0\refint\LeetCo
 D:\Downloads\LeetCodingo\backend\LeetCodingo.Api\obj\Debug\net10.0\LeetCodingo.Api.pdb
 D:\Downloads\LeetCodingo\backend\LeetCodingo.Api\obj\Debug\net10.0\LeetCodingo.Api.genruntimeconfig.cache
 D:\Downloads\LeetCodingo\backend\LeetCodingo.Api\obj\Debug\net10.0\ref\LeetCodingo.Api.dll
+D:\Downloads\LeetCodingo\backend\LeetCodingo.Api\bin\Debug\net10.0\BCrypt-Net-Next.dll
+D:\Downloads\LeetCodingo\backend\LeetCodingo.Api\bin\Debug\net10.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Downloads\LeetCodingo\backend\LeetCodingo.Api\bin\Debug\net10.0\Microsoft.Bcl.Cryptography.dll
+D:\Downloads\LeetCodingo\backend\LeetCodingo.Api\bin\Debug\net10.0\Microsoft.IdentityModel.Abstractions.dll
+D:\Downloads\LeetCodingo\backend\LeetCodingo.Api\bin\Debug\net10.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Downloads\LeetCodingo\backend\LeetCodingo.Api\bin\Debug\net10.0\Microsoft.IdentityModel.Logging.dll
+D:\Downloads\LeetCodingo\backend\LeetCodingo.Api\bin\Debug\net10.0\Microsoft.IdentityModel.Protocols.dll
+D:\Downloads\LeetCodingo\backend\LeetCodingo.Api\bin\Debug\net10.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Downloads\LeetCodingo\backend\LeetCodingo.Api\bin\Debug\net10.0\Microsoft.IdentityModel.Tokens.dll
+D:\Downloads\LeetCodingo\backend\LeetCodingo.Api\bin\Debug\net10.0\System.IdentityModel.Tokens.Jwt.dll

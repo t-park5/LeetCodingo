@@ -1,73 +1,70 @@
-# React + TypeScript + Vite
+# LeetCodingo — Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React + TypeScript + Vite frontend for LeetCodingo.
 
-Currently, two official plugins are available:
+LeetCodingo is a study tracking and analytics app for LeetCode users. It helps you log solved problems, sync your LeetCode history, analyze weak topics, and practice with Duolingo-style coding quizzes.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Tech Stack
 
-## React Compiler
+- React 19 + TypeScript
+- Vite
+- Tailwind CSS v4
+- shadcn/ui (base-nova style)
+- React Router
+- i18next (internationalization)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Pages
 
-## Expanding the ESLint configuration
+| Route | Page | Description |
+|-------|------|-------------|
+| `/` | Dashboard | Overview of recent activity and stats |
+| `/add` | Add Problem | Manually log a solved problem |
+| `/progress` | My Progress | Personal stats and topic tag breakdown |
+| `/leaderboard` | Leaderboard | Global score ranking across all users |
+| `/quiz` | Quiz | Duolingo-style coding quiz by topic chapter |
+| `/login` | Login | Sign in to your account |
+| `/register` | Register | Create a new account |
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Setup
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Create a `.env.local` file in this folder:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+VITE_API_URL=http://localhost:5000
+```
+
+## Environment Variables
+
+| Variable | Description |
+|----------|-------------|
+| `VITE_API_URL` | Base URL for the backend API |
+
+## Project Structure
+
+```
+src/
+  pages/          # Main route pages
+  components/
+    layout/       # Sidebar and Layout wrapper
+    ui/           # shadcn/ui components
+  services/       # API call functions (uses VITE_API_URL)
+  types/          # TypeScript type definitions
+  lib/
+    utils.ts      # cn() helper
+```
+
+## Auth
+
+JWT token is stored in localStorage under the key `authToken`.  
+Logged-in user object is stored under `currentUser`.
+
+## Scoring
+
+- Easy = 1 point
+- Medium = 3 points
+- Hard = 5 points

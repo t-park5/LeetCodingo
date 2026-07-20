@@ -6,7 +6,8 @@
     "dashboard": "Inicio",
     "addProblem": "Agregar Problema",
     "myProgress": "Mi Progreso",
-    "leaderboard": "Clasificación"
+    "leaderboard": "Clasificación",
+    "quiz": "Quiz de Práctica"
   },
   "dashboard": {
     "title": "LeetCodingo 🦉",
@@ -100,10 +101,72 @@
   "language": {
     "label": "Idioma"
   },
+  "auth": {
+    "loginTitle": "¡Bienvenido de nuevo!",
+    "loginSubtitle": "Inicia sesión para continuar",
+    "registerTitle": "Crear cuenta",
+    "registerSubtitle": "Comienza tu viaje de estudio",
+    "username": "Nombre de usuario",
+    "usernamePlaceholder": "ej. leetcoder123",
+    "password": "Contraseña",
+    "passwordPlaceholder": "Tu contraseña",
+    "passwordRegisterPlaceholder": "Mínimo 6 caracteres",
+    "email": "Correo",
+    "emailPlaceholder": "ej. tu@email.com",
+    "optional": "(opcional)",
+    "loginBtn": "Iniciar sesión",
+    "loggingIn": "Entrando...",
+    "registerBtn": "Crear cuenta",
+    "registering": "Creando...",
+    "noAccount": "¿No tienes cuenta?",
+    "hasAccount": "¿Ya tienes cuenta?",
+    "registerLink": "Regístrate",
+    "loginLink": "Inicia sesión",
+    "logout": "Cerrar sesión",
+    "errorRequired": "Ingresa tu usuario y contraseña.",
+    "errorRequiredUsername": "Ingresa un nombre de usuario.",
+    "errorPasswordLength": "La contraseña debe tener al menos 6 caracteres.",
+    "errorInvalidCredentials": "Usuario o contraseña incorrectos.",
+    "errorUsernameTaken": "Nombre de usuario ya en uso.",
+    "errorBadRequest": "Datos incorrectos.",
+    "errorServer": "No se puede conectar al servidor."
+  },
+  "sync": {
+    "syncBtn": "Sincronizar con LeetCode",
+    "syncing": "Sincronizando...",
+    "noLeetCodeId": "Configura tu usuario de LeetCode para sincronizar.",
+    "successMessage": "¡Sincronización completa!",
+    "errorSync": "Error al sincronizar. Intenta de nuevo.",
+    "tagBreakdownTitle": "Temas practicados",
+    "noTags": "Sin datos de temas aún. Sincroniza tu cuenta.",
+    "problems": "problemas"
+  },
+  "quiz": {
+    "title": "Quiz de Práctica",
+    "subtitle": "Refuerza tu conocimiento de algoritmos",
+    "chapterSelect": "Elige un tema",
+    "questions": "preguntas",
+    "startBtn": "Empezar",
+    "nextBtn": "Siguiente",
+    "finishBtn": "Terminar",
+    "checkBtn": "Verificar",
+    "correct": "¡Correcto!",
+    "incorrect": "Incorrecto",
+    "explanation": "Explicación",
+    "result": "Puntuación",
+    "outOf": "de",
+    "backToChapters": "Volver a temas",
+    "loading": "Cargando...",
+    "errorLoad": "Error al cargar el quiz.",
+    "fillBlank": "Completar el espacio",
+    "findBug": "Encontrar el error",
+    "predictOutput": "Predecir la salida"
+  },
   "mascot": {
     "dashboard": "¡Everyone!\n¡Vamos a Leetcodear! 🦉",
     "addProblem": "¿Resolviste algo?\n¡Regístralo ya! ✍️",
     "progress": "¡La constancia es clave!\nSigue así 💪",
-    "leaderboard": "¡Sigue esforzándote,\nel primer lugar te espera! 🏆"
+    "leaderboard": "¡Sigue esforzándote,\nel primer lugar te espera! 🏆",
+    "quiz": "¡Pon a prueba tus conocimientos!\nLa práctica hace al maestro! 🧠"
   }
 }

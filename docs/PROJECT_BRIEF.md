@@ -82,17 +82,17 @@ The mini project should stay simple and realistic.
 
 ## Final Project Expansion
 
-The final project will turn LeetCodingo into a study analytics app.
+The final project will turn LeetCodingo into a full study analytics and interactive learning app.
 
 ### Final Project Features
 
-1. LeetCode username connection
-2. Public LeetCode stats sync if possible
-3. Recent accepted submission sync if possible
-4. Weak topic analysis
-5. Recommendation system
-6. Study dashboard
-7. Optional AI Study Coach
+1. User authentication (sign up and login with password)
+2. LeetCode username connection and auto-sync of recent accepted submissions
+3. Topic tag collection from LeetCode problem data
+4. Weak topic analysis based on solved tag distribution
+5. Topic recommendation system (suggest underrepresented tags)
+6. Duolingo-style coding quiz system with topic chapters
+7. Optional AI Study Coach (explain weak topics in friendly language)
 
 ## Important Design Decision
 
@@ -132,10 +132,11 @@ Fields:
 - Id
 - UserName
 - Email
+- PasswordHash (BCrypt hashed, added in final project)
 - LeetCodeUsername
 - CreatedAt
 
-For the MVP, authentication can be skipped. A simple username system is enough at first.
+Authentication uses simple JWT tokens. Register and login are handled via `/api/auth/register` and `/api/auth/login`.
 
 ### Problem
 
@@ -151,11 +152,25 @@ Fields:
 - Url
 - GlobalAcceptanceRate
 
+### Tag
+
+Represents a LeetCode topic tag (e.g. Array, Dynamic Programming, Tree).
+
+Fields:
+
+- Id
+- Name (unique, e.g. "Dynamic Programming")
+
 ### ProblemTag
 
-Not used in the mini project MVP. Reserved for the final project analytics phase.
+Join table linking problems to their topic tags.
 
-Topic tag examples for future use: Array, Hash Table, Two Pointers, Stack, Queue, Binary Search, Tree, Graph, Dynamic Programming, Backtracking, Sliding Window.
+Fields:
+
+- ProblemId
+- TagId
+
+Topic tag examples: Array, Hash Table, Two Pointers, Stack, Queue, Binary Search, Tree, Graph, Dynamic Programming, Backtracking, Sliding Window.
 
 ### Submission
 
@@ -298,15 +313,19 @@ GET /api/analytics/user/{userId}/recommendations
 
 These analytics endpoints are for the final project version.
 
+### Auth
+
+POST /api/auth/register
+
+POST /api/auth/login
+
 ### LeetCode Sync
 
-POST /api/leetcode/connect
-
-POST /api/leetcode/sync
+POST /api/leetcode/sync/{userId}
 
 GET /api/leetcode/user/{userId}/stats
 
-These sync endpoints are optional and should be added after the MVP works.
+The sync endpoint fetches recent accepted submissions from LeetCode's unofficial GraphQL API and stores them in the database along with problem tags.
 
 ## Weak Topic Algorithm Idea
 
@@ -410,7 +429,7 @@ Add basic analytics.
 Features:
 
 1. Solved by difficulty
-2. Solved by topic
+2. Solved by topic tag
 3. Weekly solved count
 4. Weak topic score
 5. Simple recommendation list
@@ -421,11 +440,14 @@ Add advanced features.
 
 Features:
 
-1. LeetCode username connection
-2. LeetCode public stats sync
-3. Recent accepted submissions sync
-4. AI Study Coach
-5. Better recommendation system
+1. Sign up and login (password-based auth with JWT)
+2. LeetCode username connection and auto-sync
+3. Topic tag collection from LeetCode GraphQL API
+4. Weak topic analysis and recommendation
+5. Duolingo-style coding quiz system
+   - Topic chapters (e.g. Array, Tree, Dynamic Programming)
+   - Question types: fill in the blank, find the bug, predict the output
+   - ~2-3 chapters with ~10 questions each
 6. More polished dashboard
 
 ## MVP Rule

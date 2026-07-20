@@ -6,7 +6,8 @@
     "dashboard": "대시보드",
     "addProblem": "문제 기록",
     "myProgress": "내 진행상황",
-    "leaderboard": "리더보드"
+    "leaderboard": "리더보드",
+    "quiz": "연습 퀴즈"
   },
   "dashboard": {
     "title": "LeetCodingo 🦉",
@@ -100,10 +101,72 @@
   "language": {
     "label": "언어"
   },
+  "auth": {
+    "loginTitle": "다시 오셨군요!",
+    "loginSubtitle": "로그인하고 학습을 이어가세요",
+    "registerTitle": "계정 만들기",
+    "registerSubtitle": "LeetCode 학습을 시작해볼까요",
+    "username": "유저명",
+    "usernamePlaceholder": "예: leetcoder123",
+    "password": "비밀번호",
+    "passwordPlaceholder": "비밀번호 입력",
+    "passwordRegisterPlaceholder": "6자 이상 입력해 주세요",
+    "email": "이메일",
+    "emailPlaceholder": "예: you@email.com",
+    "optional": "(선택)",
+    "loginBtn": "로그인",
+    "loggingIn": "로그인 중...",
+    "registerBtn": "계정 만들기",
+    "registering": "생성 중...",
+    "noAccount": "계정이 없으신가요?",
+    "hasAccount": "이미 계정이 있으신가요?",
+    "registerLink": "회원가입",
+    "loginLink": "로그인",
+    "logout": "로그아웃",
+    "errorRequired": "유저명과 비밀번호를 입력해 주세요.",
+    "errorRequiredUsername": "유저명을 입력해 주세요.",
+    "errorPasswordLength": "비밀번호는 6자 이상이어야 합니다.",
+    "errorInvalidCredentials": "유저명 또는 비밀번호가 잘못되었습니다.",
+    "errorUsernameTaken": "이미 사용 중인 유저명입니다.",
+    "errorBadRequest": "입력값이 올바르지 않습니다.",
+    "errorServer": "서버에 연결할 수 없습니다. 다시 시도해 주세요."
+  },
+  "sync": {
+    "syncBtn": "LeetCode 동기화",
+    "syncing": "동기화 중...",
+    "noLeetCodeId": "프로필에 LeetCode 아이디를 설정하면 동기화할 수 있어요.",
+    "successMessage": "동기화 완료!",
+    "errorSync": "동기화에 실패했습니다. 다시 시도해 주세요.",
+    "tagBreakdownTitle": "주제별 풀이",
+    "noTags": "아직 주제 데이터가 없어요. LeetCode 동기화를 해보세요.",
+    "problems": "문제"
+  },
+  "quiz": {
+    "title": "연습 퀴즈",
+    "subtitle": "알고리즘 지식을 강화해요",
+    "chapterSelect": "주제 선택",
+    "questions": "문제",
+    "startBtn": "시작하기",
+    "nextBtn": "다음",
+    "finishBtn": "완료",
+    "checkBtn": "확인",
+    "correct": "정답이에요!",
+    "incorrect": "틀렸어요",
+    "explanation": "해설",
+    "result": "점수",
+    "outOf": "/",
+    "backToChapters": "주제 목록으로",
+    "loading": "불러오는 중...",
+    "errorLoad": "퀴즈 데이터를 불러오지 못했습니다.",
+    "fillBlank": "빈칸 채우기",
+    "findBug": "버그 찾기",
+    "predictOutput": "출력 예측"
+  },
   "mascot": {
     "dashboard": "Everyone!\n렛츠 릿코드! 🦉",
     "addProblem": "문제 풀었나요?\n얼른 기록해요! ✍️",
     "progress": "꾸준함이 최고예요!\n오늘도 수고했어요 💪",
-    "leaderboard": "열심히 하면\n1등도 문제없어요! 🏆"
+    "leaderboard": "열심히 하면\n1등도 문제없어요! 🏆",
+    "quiz": "지식을 테스트해봐요!\n연습이 실력을 만들어요! 🧠"
   }
 }

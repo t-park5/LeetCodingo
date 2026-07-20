@@ -34,12 +34,93 @@ namespace LeetCodingo.Api.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("TitleSlug")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
                     b.HasIndex("LeetCodeNumber")
                         .IsUnique();
 
                     b.ToTable("Problems");
+                });
+
+            modelBuilder.Entity("LeetCodingo.Api.Models.ProblemTag", b =>
+                {
+                    b.Property<int>("ProblemId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("TagId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("ProblemId", "TagId");
+
+                    b.HasIndex("TagId");
+
+                    b.ToTable("ProblemTags");
+                });
+
+            modelBuilder.Entity("LeetCodingo.Api.Models.QuizChapter", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("QuizChapters");
+                });
+
+            modelBuilder.Entity("LeetCodingo.Api.Models.QuizQuestion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ChapterId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("CodeSnippet")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CorrectAnswer")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Explanation")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("OptionsJson")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Prompt")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("QuestionType")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChapterId");
+
+                    b.ToTable("QuizQuestions");
                 });
 
             modelBuilder.Entity("LeetCodingo.Api.Models.Submission", b =>
@@ -69,6 +150,24 @@ namespace LeetCodingo.Api.Migrations
                     b.ToTable("Submissions");
                 });
 
+            modelBuilder.Entity("LeetCodingo.Api.Models.Tag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("Tags");
+                });
+
             modelBuilder.Entity("LeetCodingo.Api.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -84,6 +183,10 @@ namespace LeetCodingo.Api.Migrations
                     b.Property<string>("LeetCodeUsername")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -94,6 +197,36 @@ namespace LeetCodingo.Api.Migrations
                         .IsUnique();
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("LeetCodingo.Api.Models.ProblemTag", b =>
+                {
+                    b.HasOne("LeetCodingo.Api.Models.Problem", "Problem")
+                        .WithMany("ProblemTags")
+                        .HasForeignKey("ProblemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LeetCodingo.Api.Models.Tag", "Tag")
+                        .WithMany("ProblemTags")
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Problem");
+
+                    b.Navigation("Tag");
+                });
+
+            modelBuilder.Entity("LeetCodingo.Api.Models.QuizQuestion", b =>
+                {
+                    b.HasOne("LeetCodingo.Api.Models.QuizChapter", "Chapter")
+                        .WithMany("Questions")
+                        .HasForeignKey("ChapterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Chapter");
                 });
 
             modelBuilder.Entity("LeetCodingo.Api.Models.Submission", b =>
@@ -117,7 +250,19 @@ namespace LeetCodingo.Api.Migrations
 
             modelBuilder.Entity("LeetCodingo.Api.Models.Problem", b =>
                 {
+                    b.Navigation("ProblemTags");
+
                     b.Navigation("Submissions");
+                });
+
+            modelBuilder.Entity("LeetCodingo.Api.Models.QuizChapter", b =>
+                {
+                    b.Navigation("Questions");
+                });
+
+            modelBuilder.Entity("LeetCodingo.Api.Models.Tag", b =>
+                {
+                    b.Navigation("ProblemTags");
                 });
 
             modelBuilder.Entity("LeetCodingo.Api.Models.User", b =>

@@ -6,7 +6,8 @@
     "dashboard": "Dashboard",
     "addProblem": "Add Problem",
     "myProgress": "My Progress",
-    "leaderboard": "Leaderboard"
+    "leaderboard": "Leaderboard",
+    "quiz": "Practice Quiz"
   },
   "dashboard": {
     "title": "LeetCodingo 🦉",
@@ -100,10 +101,72 @@
   "language": {
     "label": "Language"
   },
+  "auth": {
+    "loginTitle": "Welcome Back",
+    "loginSubtitle": "Sign in to continue your study journey",
+    "registerTitle": "Create Account",
+    "registerSubtitle": "Start tracking your LeetCode journey",
+    "username": "Username",
+    "usernamePlaceholder": "e.g. leetcoder123",
+    "password": "Password",
+    "passwordPlaceholder": "Your password",
+    "passwordRegisterPlaceholder": "At least 6 characters",
+    "email": "Email",
+    "emailPlaceholder": "e.g. you@email.com",
+    "optional": "(optional)",
+    "loginBtn": "Sign In",
+    "loggingIn": "Signing in...",
+    "registerBtn": "Create Account",
+    "registering": "Creating...",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "registerLink": "Sign up",
+    "loginLink": "Sign in",
+    "logout": "Sign Out",
+    "errorRequired": "Please enter your username and password.",
+    "errorRequiredUsername": "Please enter a username.",
+    "errorPasswordLength": "Password must be at least 6 characters.",
+    "errorInvalidCredentials": "Invalid username or password.",
+    "errorUsernameTaken": "Username already taken.",
+    "errorBadRequest": "Invalid input. Please check your details.",
+    "errorServer": "Cannot connect to the server. Please try again."
+  },
+  "sync": {
+    "syncBtn": "Sync with LeetCode",
+    "syncing": "Syncing...",
+    "noLeetCodeId": "Set your LeetCode username in your profile to enable sync.",
+    "successMessage": "Sync complete!",
+    "errorSync": "Sync failed. Please try again.",
+    "tagBreakdownTitle": "Topics Practiced",
+    "noTags": "No topic data yet. Sync your LeetCode account to see topics.",
+    "problems": "problems"
+  },
+  "quiz": {
+    "title": "Practice Quiz",
+    "subtitle": "Strengthen your algorithm knowledge",
+    "chapterSelect": "Choose a Topic",
+    "questions": "questions",
+    "startBtn": "Start",
+    "nextBtn": "Next",
+    "finishBtn": "Finish",
+    "checkBtn": "Check",
+    "correct": "Correct!",
+    "incorrect": "Incorrect",
+    "explanation": "Explanation",
+    "result": "You scored",
+    "outOf": "out of",
+    "backToChapters": "Back to Topics",
+    "loading": "Loading...",
+    "errorLoad": "Failed to load quiz data.",
+    "fillBlank": "Fill in the blank",
+    "findBug": "Find the bug",
+    "predictOutput": "Predict the output"
+  },
   "mascot": {
     "dashboard": "Everyone!\nLet's Leetcode! 🦉",
     "addProblem": "Solved a problem?\nLog it right now! ✍️",
     "progress": "Consistency is key!\nKeep up the great work 💪",
-    "leaderboard": "Keep grinding,\nthe top spot awaits! 🏆"
+    "leaderboard": "Keep grinding,\nthe top spot awaits! 🏆",
+    "quiz": "Test your knowledge!\nPractice makes perfect! 🧠"
   }
 }
