@@ -1,0 +1,15 @@
+# Build output and dependencies
+bin/
+obj/
+node_modules/
+dist/
+
+# Local SQLite databases
+*.db
+*.db-shm
+*.db-wal
+
+# Local configuration and OS files
+.env.local
+.env.*.local
+.DS_Store

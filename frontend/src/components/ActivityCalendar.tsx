@@ -85,7 +85,7 @@ export function ActivityCalendar({ activity }: Props) {
 
           {/* Month labels row */}
           <div style={{ display: "flex", marginLeft: 28, marginBottom: 4 }}>
-            {weeks.map((week, col) => {
+            {weeks.map((_, col) => {
               const label = monthLabels.find((m) => m.col === col);
               return (
                 <div

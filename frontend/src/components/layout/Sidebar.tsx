@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { LayoutDashboard, BarChart2, Trophy, UserCircle, Globe, Brain, LogOut } from "lucide-react";
+import { LayoutDashboard, Trophy, UserCircle, Globe, Brain, LogOut } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { authService } from "@/services/auth";
 import type { User } from "@/types";
