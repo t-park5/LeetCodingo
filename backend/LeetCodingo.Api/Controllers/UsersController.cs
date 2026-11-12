@@ -8,47 +8,24 @@ namespace LeetCodingo.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class UsersController(AppDbContext db) : ControllerBase
+public class UsersController(AppDbContext db) : AuthenticatedController
 {
     // GET /api/users
     [HttpGet]
     public async Task<ActionResult<IEnumerable<UserResponse>>> GetAll()
     {
         var users = await db.Users.ToListAsync();
-        return Ok(users.Select(ToResponse));
+        return Ok(users.Select(u => ToResponse(u, IsCurrentUser(u.Id))));
     }
 
     // GET /api/users/{id}
     [HttpGet("{id}")]
     public async Task<ActionResult<UserResponse>> GetById(int id)
     {
+        if (!IsCurrentUser(id)) return Forbid();
         var user = await db.Users.FindAsync(id);
         if (user is null) return NotFound();
         return Ok(ToResponse(user));
-    }
-
-    // POST /api/users
-    [HttpPost]
-    public async Task<ActionResult<UserResponse>> Create(CreateUserRequest request)
-    {
-        if (string.IsNullOrWhiteSpace(request.UserName))
-            return BadRequest("UserName is required.");
-
-        var exists = await db.Users.AnyAsync(u => u.UserName == request.UserName);
-        if (exists)
-            return Conflict($"Username '{request.UserName}' is already taken.");
-
-        var user = new User
-        {
-            UserName = request.UserName.Trim(),
-            Email = request.Email?.Trim(),
-            LeetCodeUsername = request.LeetCodeUsername?.Trim()
-        };
-
-        db.Users.Add(user);
-        await db.SaveChangesAsync();
-
-        return CreatedAtAction(nameof(GetById), new { id = user.Id }, ToResponse(user));
     }
 
     // POST /api/users/{id}/checkin
@@ -56,6 +33,7 @@ public class UsersController(AppDbContext db) : ControllerBase
     [HttpPost("{id}/checkin")]
     public async Task<ActionResult<CheckInResponse>> CheckIn(int id)
     {
+        if (!IsCurrentUser(id)) return Forbid();
         var user = await db.Users.FindAsync(id);
         if (user is null) return NotFound();
 
@@ -103,6 +81,7 @@ public class UsersController(AppDbContext db) : ControllerBase
     [HttpPut("{id}/goal")]
     public async Task<ActionResult<WeeklyGoalResponse>> UpdateGoal(int id, UpdateGoalRequest request)
     {
+        if (!IsCurrentUser(id)) return Forbid();
         var user = await db.Users.FindAsync(id);
         if (user is null) return NotFound();
 
@@ -123,11 +102,11 @@ public class UsersController(AppDbContext db) : ControllerBase
         });
     }
 
-    private static UserResponse ToResponse(User u) => new()
+    private static UserResponse ToResponse(User u, bool includeEmail = true) => new()
     {
         Id = u.Id,
         UserName = u.UserName,
-        Email = u.Email,
+        Email = includeEmail ? u.Email : null,
         LeetCodeUsername = u.LeetCodeUsername,
         CurrentStreak = u.CurrentStreak,
         WeeklyGoalLessons = u.WeeklyGoalLessons,

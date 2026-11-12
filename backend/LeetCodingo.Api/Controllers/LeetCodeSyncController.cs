@@ -10,7 +10,7 @@ namespace LeetCodingo.Api.Controllers;
 
 [ApiController]
 [Route("api/leetcode")]
-public class LeetCodeSyncController(AppDbContext db, IHttpClientFactory httpClientFactory) : ControllerBase
+public class LeetCodeSyncController(AppDbContext db, IHttpClientFactory httpClientFactory) : AuthenticatedController
 {
     private const string LeetCodeGraphQL = "https://leetcode.com/graphql";
 
@@ -19,6 +19,7 @@ public class LeetCodeSyncController(AppDbContext db, IHttpClientFactory httpClie
     [HttpPost("sync/{userId}")]
     public async Task<ActionResult<SyncResultResponse>> Sync(int userId)
     {
+        if (!IsCurrentUser(userId)) return Forbid();
         var user = await db.Users.FindAsync(userId);
         if (user is null) return NotFound("User not found.");
         if (string.IsNullOrWhiteSpace(user.LeetCodeUsername))
@@ -160,6 +161,7 @@ public class LeetCodeSyncController(AppDbContext db, IHttpClientFactory httpClie
     [HttpGet("tags/{userId}")]
     public async Task<ActionResult<IEnumerable<TagStatResponse>>> GetTagStats(int userId)
     {
+        if (!IsCurrentUser(userId)) return Forbid();
         var stats = await db.Submissions
             .Where(s => s.UserId == userId)
             .SelectMany(s => s.Problem.ProblemTags)

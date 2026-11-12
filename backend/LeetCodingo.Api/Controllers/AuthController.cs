@@ -71,7 +71,7 @@ public class AuthController(AppDbContext db, IConfiguration config) : Controller
 
     private string GenerateJwtToken(User user)
     {
-        var jwtKey = config["Jwt:Key"] ?? "leetcodingo-default-secret-key-change-in-production";
+        var jwtKey = config["Jwt:Key"] ?? throw new InvalidOperationException("Jwt:Key is required.");
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
         var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 

@@ -8,12 +8,13 @@ namespace LeetCodingo.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class SubmissionsController(AppDbContext db) : ControllerBase
+public class SubmissionsController(AppDbContext db) : AuthenticatedController
 {
     // POST /api/submissions
     [HttpPost]
     public async Task<ActionResult<SubmissionResponse>> Create(CreateSubmissionRequest request)
     {
+        if (!IsCurrentUser(request.UserId)) return Forbid();
         var user = await db.Users.FindAsync(request.UserId);
         if (user is null) return NotFound($"User {request.UserId} not found.");
 
@@ -40,6 +41,7 @@ public class SubmissionsController(AppDbContext db) : ControllerBase
     [HttpGet("user/{userId}")]
     public async Task<ActionResult<IEnumerable<SubmissionResponse>>> GetByUser(int userId)
     {
+        if (!IsCurrentUser(userId)) return Forbid();
         var userExists = await db.Users.AnyAsync(u => u.Id == userId);
         if (!userExists) return NotFound($"User {userId} not found.");
 
@@ -57,6 +59,7 @@ public class SubmissionsController(AppDbContext db) : ControllerBase
     [HttpGet("user/{userId}/stats")]
     public async Task<ActionResult<UserStatsResponse>> GetStats(int userId)
     {
+        if (!IsCurrentUser(userId)) return Forbid();
         var user = await db.Users.FindAsync(userId);
         if (user is null) return NotFound($"User {userId} not found.");
 
@@ -88,6 +91,7 @@ public class SubmissionsController(AppDbContext db) : ControllerBase
     [HttpGet("activity/{userId}")]
     public async Task<ActionResult<Dictionary<string, int>>> GetActivity(int userId)
     {
+        if (!IsCurrentUser(userId)) return Forbid();
         var dates = await db.Submissions
             .Where(s => s.UserId == userId)
             .Select(s => s.SolvedDate)

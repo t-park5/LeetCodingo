@@ -9,13 +9,14 @@ namespace LeetCodingo.Api.Controllers;
 
 [ApiController]
 [Route("api/quiz")]
-public class QuizController(AppDbContext db) : ControllerBase
+public class QuizController(AppDbContext db) : AuthenticatedController
 {
     // GET /api/quiz/chapters?userId=1
     // Returns chapters with user progress (locked/unlocked/completed) when userId is provided.
     [HttpGet("chapters")]
     public async Task<ActionResult<IEnumerable<QuizChapterResponse>>> GetChapters([FromQuery] int? userId)
     {
+        if (userId.HasValue && !IsCurrentUser(userId.Value)) return Forbid();
         var chapters = await db.QuizChapters
             .OrderBy(c => c.Order)
             .Select(c => new { c.Id, c.Title, c.Description, c.Order, c.UnitTitle, Count = c.Questions.Count })
@@ -92,6 +93,7 @@ public class QuizController(AppDbContext db) : ControllerBase
     [HttpPost("submit")]
     public async Task<ActionResult<SubmitLessonResponse>> SubmitLesson(SubmitLessonRequest request)
     {
+        if (!IsCurrentUser(request.UserId)) return Forbid();
         var user = await db.Users.FindAsync(request.UserId);
         if (user is null) return NotFound("User not found.");
 
@@ -173,6 +175,7 @@ public class QuizController(AppDbContext db) : ControllerBase
     [HttpGet("review/{userId}")]
     public async Task<ActionResult<IEnumerable<WrongAnswerResponse>>> GetWrongAnswers(int userId)
     {
+        if (!IsCurrentUser(userId)) return Forbid();
         var wrongs = await db.UserWrongAnswers
             .Include(w => w.Question)
             .Where(w => w.UserId == userId && w.ReviewedAt == null)
@@ -194,6 +197,7 @@ public class QuizController(AppDbContext db) : ControllerBase
     [HttpPost("chapters/{chapterId}/skip")]
     public async Task<IActionResult> SkipChapter(int chapterId, [FromQuery] int userId)
     {
+        if (!IsCurrentUser(userId)) return Forbid();
         var chapter = await db.QuizChapters.FindAsync(chapterId);
         if (chapter is null) return NotFound("Chapter not found.");
 
@@ -228,6 +232,7 @@ public class QuizController(AppDbContext db) : ControllerBase
     {
         var wrong = await db.UserWrongAnswers.FindAsync(wrongAnswerId);
         if (wrong is null) return NotFound();
+        if (!IsCurrentUser(wrong.UserId)) return Forbid();
 
         wrong.ReviewedAt = DateTime.UtcNow;
         await db.SaveChangesAsync();

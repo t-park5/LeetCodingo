@@ -15,16 +15,16 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
     {
-        policy.AllowAnyOrigin()
+        policy.WithOrigins("http://localhost:5173")
               .AllowAnyMethod()
               .AllowAnyHeader();
     });
 });
 
-var jwtKey = builder.Configuration["Jwt:Key"] ?? "leetcodingo-default-secret-key-change-in-production";
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
+        var jwtKey = builder.Configuration["Jwt:Key"]!;
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
@@ -41,10 +41,15 @@ builder.Services.AddHttpClient();
 
 var app = builder.Build();
 
+var configuredKey = app.Configuration["Jwt:Key"];
+if (string.IsNullOrWhiteSpace(configuredKey) || Encoding.UTF8.GetByteCount(configuredKey) < 32)
+    throw new InvalidOperationException("Set Jwt:Key to a secret of at least 32 bytes using user-secrets or Jwt__Key.");
+
 // Seed quiz data on startup
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<LeetCodingo.Api.Data.AppDbContext>();
+    await db.Database.MigrateAsync();
     await LeetCodingo.Api.Data.QuizSeedData.SeedAsync(db);
 }
 
@@ -54,3 +59,6 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+// Exposes the entry point to WebApplicationFactory integration tests.
+public partial class Program { }

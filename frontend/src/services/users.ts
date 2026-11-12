@@ -6,9 +6,6 @@ export const usersService = {
 
   getById: (id: number) => api.get<User>(`/api/users/${id}`),
 
-  create: (data: { userName: string; leetCodeUsername?: string; email?: string }) =>
-    api.post<User>("/api/users", data),
-
   checkIn: (userId: number) =>
     api.post<CheckInResponse>(`/api/users/${userId}/checkin`, {}),
 

@@ -35,6 +35,7 @@ public class ProblemsController(AppDbContext db) : ControllerBase
     }
 
     // POST /api/problems
+    [Microsoft.AspNetCore.Authorization.Authorize]
     [HttpPost]
     public async Task<ActionResult<ProblemResponse>> Create(CreateProblemRequest request)
     {
