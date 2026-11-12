@@ -12,9 +12,9 @@ import { authService } from "@/services/auth";
 import type { UserStats, Submission, TagStat } from "@/types";
 
 const DIFFICULTY_CONFIG = {
-  Easy:   { color: "text-green-600",  bg: "bg-green-50",  border: "border-green-200", badge: "bg-green-100 text-green-700",  score: 1,  progressColor: "[&>div]:bg-green-400" },
-  Medium: { color: "text-yellow-600", bg: "bg-yellow-50", border: "border-yellow-200", badge: "bg-yellow-100 text-yellow-700", score: 3, progressColor: "[&>div]:bg-yellow-400" },
-  Hard:   { color: "text-red-600",    bg: "bg-red-50",    border: "border-red-200",    badge: "bg-red-100 text-red-700",      score: 5,  progressColor: "[&>div]:bg-red-400" },
+  Easy:   { color: "text-green-600",  bg: "bg-green-50",  border: "border-green-200", badge: "bg-green-100 text-green-700",  score: 1,  progressColor: "[&_[data-slot=progress-indicator]]:bg-green-400" },
+  Medium: { color: "text-yellow-600", bg: "bg-yellow-50", border: "border-yellow-200", badge: "bg-yellow-100 text-yellow-700", score: 3, progressColor: "[&_[data-slot=progress-indicator]]:bg-yellow-400" },
+  Hard:   { color: "text-red-600",    bg: "bg-red-50",    border: "border-red-200",    badge: "bg-red-100 text-red-700",      score: 5,  progressColor: "[&_[data-slot=progress-indicator]]:bg-red-400" },
 };
 
 const TAG_COLORS = [
